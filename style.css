@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    padding: 50px 20px;
+    color: #222;
+}
+
+.pricing-container {
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Pricing cards layout */
+.pricing-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    grid-template-areas:
+        "basic pro premium";
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+/* Individual cards */
+.pricing-card {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+        "header"
+        "price"
+        "features"
+        "action";
+
+    grid-template-rows:
+        100px
+        110px
+        1fr
+        65px;
+
+    background: white;
+    border: 2px solid #e2e5ed;
+    border-radius: 16px;
+    padding: 25px;
+    position: relative;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+/* Position each card */
+.basic {
+    grid-area: basic;
+}
+
+.pro {
+    grid-area: pro;
+}
+
+.premium {
+    grid-area: premium;
+}
+
+/* Header */
+.header {
+    grid-area: header;
+}
+
+.header h2 {
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+.header p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Price */
+.price {
+    grid-area: price;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.price h3 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.price span {
+    font-size: 14px;
+    color: #777;
+    font-weight: normal;
+}
+
+/* Features */
+.features {
+    grid-area: features;
+    list-style: none;
+    text-align: left;
+    padding: 0;
+}
+
+.features li {
+    margin-bottom: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.features li::before {
+    content: "✓";
+    color: #16a34a;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Action button */
+.action {
+    grid-area: action;
+    align-self: end;
+}
+
+.action button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #e9ecf5;
+    color: #222;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action button:hover {
+    background: #d9def0;
+}
+
+/* Most Popular card */
+.pro {
+    border: 2px solid #635bff;
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #635bff;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.pro .action button {
+    background: #635bff;
+    color: white;
+}
+
+.pro .action button:hover {
+    background: #4b43df;
+}
+
+/* Hide radio inputs but keep them accessible */
+.pricing-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Active selection state */
+.pricing-card:has(input[type="radio"]:checked) {
+    border-color: #16a34a;
+    box-shadow: 0 8px 30px rgba(22, 163, 74, 0.18);
+    transform: translateY(-5px);
+}
+
+.pricing-card:has(input[type="radio"]:checked) .action button {
+    background: #16a34a;
+    color: white;
+}
+
+.pricing-card:has(input[type="radio"]:checked) .action button::after {
+    content: " ✓";
+}
+
+/* Keyboard accessibility */
+.pricing-card:has(input[type="radio"]:focus-visible) {
+    outline: 3px solid #16a34a;
+    outline-offset: 4px;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 800px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "basic"
+            "pro"
+            "premium";
+        gap: 35px;
+        max-width: 450px;
+        margin: auto;
+    }
+
+    .pricing-card {
+        min-height: 430px;
+    }
+}
